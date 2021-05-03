@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaflet Practice 01</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #mapid {
+        height: 100vh;
+        width: 100vw;
+      }
+    </style>
+  </head>
+  <!--
+  0- Leer el quick-start de leaflet: https://leafletjs.com/examples/quick-start/
+  1- Añadir el CDN de leaflet para leaflet.css
+  2- Idem 1 para leaflet.js
+  3- Crear el elemento html que será el contenedor del mapa: div#mapid
+  4- Crear un map pasándole el id del contenedor
+  5- Invocar al método setView pasándole las coordenadas y el zoom
+  6- Establecer una tile-layer para el mapa mediante el método "addTo(mymap)". Obtenerla desde: http://leaflet-extras.github.io/leaflet-providers/preview/
+  7- Buscar en OpenStreetMap la dirección Carrer de Balmes 16, obtener las coordenadas y con ellas establecer un marcador
+ -->
+  <body>
+    <div id="mapid"></div>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+
+    <script>
+      const mymap = L.map("mapid").setView([41.38690, 2.17020], 17)
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(mymap)
+
+      const marker = L.marker([41.38686, 2.16611])
+      
+      marker.addTo(mymap)
+
+      const message = `
+      <b>Restaurant Centfocs</b>
+      <p>Restaurante mediterráneo<br>
+      Carrer de Balmes, 16, 08007 Barcelona</p>`
+      
+      marker.bindPopup(message)
+    </script>
+  
+</body>
+</html>
